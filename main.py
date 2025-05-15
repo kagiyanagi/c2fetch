@@ -10,5 +10,5 @@ i = 1
 a = 0
 
 while a <= i :
-    print(f'\r{core_temp(0)}', end="", flush=True)
+    print(f'\rYour Core 0\'s temp is {core_temp(0)}', end="", flush=True)
     time.sleep(1)
