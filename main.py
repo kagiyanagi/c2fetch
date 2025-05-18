@@ -1,24 +1,20 @@
-import time
-import os
+from rich.live import Live
+from rich.text import Text
+from rich.console import Console, Group
 import psutil
 
-total_core = os.cpu_count() #total cpu core count
+console = Console()
+total_cpu_cores = psutil.cpu_count(logical=False)
 
-#get a cpu core temp with lm_sensors
-        
 def locate_temp():
-    temps = psutil.sensors_temperatures()
-    cpu_pkg = temps['coretemp'][0].current
-    return int(cpu_pkg)
+    temps = psutil.sensors_temperatures().get('coretemp', [])
+    core_temp_list = []
+    for i in range(0, total_cpu_cores+1):
+        core_temp = int(temps[i].current)
+        core_temp_list.append(Text(f"Your Core{i} temp is : {core_temp}°C"))
+    return core_temp_list
 
-terminal_size = os.get_terminal_size() # get term size
-
-for i in range(0, 999999999):
-    os.system('cls' if os.name == 'nt' else 'clear') #clear the terminal
-
-    cpu_temp = locate_temp()
-
-    base_str = f'Your CPU\'s temp is {cpu_temp}°C'
-    print(base_str.center(int(terminal_size.columns),), end="")
-
-    time.sleep(1)
+with Live(console=console, refresh_per_second=1) as live:
+    while True:
+        lines = locate_temp()
+        live.update(Group(*lines))
