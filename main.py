@@ -1,6 +1,7 @@
 from rich.live import Live
 from rich.text import Text
 from rich.console import Console, Group
+from rich.align import Align
 import psutil
 
 console = Console()
@@ -17,4 +18,5 @@ def locate_temp():
 with Live(console=console, refresh_per_second=1) as live:
     while True:
         lines = locate_temp()
-        live.update(Group(*lines))
+        aligned = Align.center(Group(*lines))
+        live.update(aligned)
