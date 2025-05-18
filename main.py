@@ -15,8 +15,15 @@ def locate_temp():
         core_temp_list.append(Text(f"Your Core{i} temp is : {core_temp}°C"))
     return core_temp_list
 
-with Live(console=console, refresh_per_second=1) as live:
+with Live(console=console, refresh_per_second=1, screen=True) as live:
     while True:
         lines = locate_temp()
-        aligned = Align.center(Group(*lines))
+        term_width, term_height = console.size
+        aligned = Align(
+            Group(*lines),
+            align="center",
+            vertical="middle",
+            width=term_width,
+            height=term_height
+            )
         live.update(aligned)
