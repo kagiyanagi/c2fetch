@@ -12,7 +12,7 @@ def locate_temp():
     core_temp_list = []
     for i, entry in enumerate(temps):
         if i == 0:
-            core_temp_list.append(Text(f"Highest temp Core's : {int(entry.current)}°C", style="bold"))
+            core_temp_list.append(Text(f"Highest temperature : {int(entry.current)}°C", style="bold"))
         else:
             core_temp_list.append(Text(f"Your Core{i-1}'s temp is: {int(entry.current)}°C"))
     return core_temp_list
