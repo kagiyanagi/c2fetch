@@ -6,8 +6,18 @@ import psutil
 
 console = Console()  # output console for rich
 
+# Sensor keys: try common CPU sensors in order
+try_keys = ['coretemp', 'k10temp', 'amdgpu', 'acpitz']
+
 def locate_temp():
-    temps = psutil.sensors_temperatures().get('coretemp', [])  # may vary by CPU
+    temps_dict = psutil.sensors_temperatures()
+    for key in try_keys:
+        if key in temps_dict:
+            temps = temps_dict[key]
+            break
+        else:
+            return [Text("No temperature sensors found", style="bold red")]
+    
     core_temp_list = []
     for i, entry in enumerate(temps):
         if i == 0:
