@@ -8,10 +8,13 @@ console = Console()
 total_cpu_cores = psutil.cpu_count(logical=False)
 
 def locate_temp():
-    temps = psutil.sensors_temperatures().get('coretemp', [])[1:]
+    temps = psutil.sensors_temperatures().get('coretemp', [])
     core_temp_list = []
     for i, entry in enumerate(temps):
-        core_temp_list.append(Text(f"Your Core {i} temp is: {int(entry.current)}°C"))
+        if i == 0:
+            core_temp_list.append(Text(f"Highest temp Core's : {int(entry.current)}°C", style="bold"))
+        else:
+            core_temp_list.append(Text(f"Your Core{i-1}'s temp is: {int(entry.current)}°C"))
     return core_temp_list
 
 with Live(console=console, refresh_per_second=1, screen=True) as live:
