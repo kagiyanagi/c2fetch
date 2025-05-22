@@ -5,18 +5,19 @@ from rich.align import Align
 import os
 import psutil
 import time
+import argparse
 
 console = Console()  # output console for rich
 
 # Sensor keys: try common CPU sensors in order
 try_keys = ['coretemp', 'k10temp', 'amdgpu', 'acpitz']
 
-# Add your ASCII or GIF
-gif_art = Text("""
+def create_gif_art(color = "magenta"):
+    return Text("""
   (\_/)
  ( •_•)
 / >❤ ​  CPU Temp Monitor
-""", style="bold magenta")
+""", style=f"bold {color}")
 
 def temp_style(temp):
     if temp >= 80:
@@ -25,7 +26,7 @@ def temp_style(temp):
         return "yellow"
     return "white"
 
-def locate_temp():
+def locate_temp(gif_art):
     temps_dict = psutil.sensors_temperatures()
     for key in try_keys:
         if key in temps_dict:
@@ -52,10 +53,16 @@ def locate_temp():
 
 # live view updates every second, showing centered temps
 def main():
+    parser = argparse.ArgumentParser(description="CPU Temperature Monitor")
+    parser.add_argument("--color", default="magenta", help="Set the color of the ASCII art")
+    args = parser.parse_args()
+
+    gif_art = create_gif_art(args.color)
+
     try:
         with Live(console=console, refresh_per_second=1, screen=True) as live:
             while True:
-                lines = locate_temp()
+                lines = locate_temp(gif_art)
                 w, h = console.size  # current terminal dimensions
                 view = Align(Group(*lines), align="center", vertical="middle", width=w, height=h)
                 live.update(view)
