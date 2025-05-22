@@ -2,9 +2,7 @@ from rich.live import Live
 from rich.text import Text
 from rich.console import Console, Group
 from rich.align import Align
-from rich.panel import Panel
-from rich.markdown import Markdown
-from rich import box
+import os
 import psutil
 
 console = Console()  # output console for rich
@@ -14,9 +12,9 @@ try_keys = ['coretemp', 'k10temp', 'amdgpu', 'acpitz']
 
 # Add your ASCII or GIF
 gif_art = Text("""
-       (\_/)
-      ( •_•)
-     / >❤ ​  CPU Temp Monitor
+  (\_/)
+ ( •_•)
+/ >❤ ​  CPU Temp Monitor
 """, style="bold magenta")
 
 def locate_temp():
@@ -40,12 +38,16 @@ def locate_temp():
 
 # live view updates every second, showing centered temps
 def main():
-    with Live(console=console, refresh_per_second=1, screen=True) as live:
-        while True:
-            lines = locate_temp()
-            w, h = console.size  # current terminal dimensions
-            view = Align(Group(*lines), align="center", vertical="middle", width=w, height=h)
-            live.update(view)
+    try:
+        with Live(console=console, refresh_per_second=1, screen=True) as live:
+            while True:
+                lines = locate_temp()
+                w, h = console.size  # current terminal dimensions
+                view = Align(Group(*lines), align="center", vertical="middle", width=w, height=h)
+                live.update(view)
+
+    except KeyboardInterrupt:
+        os.system('cls' if os.name == 'nt' else 'clear')
 
 if __name__ == "__main__":
     main()
