@@ -2,6 +2,9 @@ from rich.live import Live
 from rich.text import Text
 from rich.console import Console, Group
 from rich.align import Align
+from rich.panel import Panel
+from rich.markdown import Markdown
+from rich import box
 import psutil
 
 console = Console()  # output console for rich
@@ -9,16 +12,23 @@ console = Console()  # output console for rich
 # Sensor keys: try common CPU sensors in order
 try_keys = ['coretemp', 'k10temp', 'amdgpu', 'acpitz']
 
+# Add your ASCII or GIF
+gif_art = Text("""
+       (\_/)
+      ( •_•)
+     / >❤ ​  CPU Temp Monitor
+""", style="bold magenta")
+
 def locate_temp():
     temps_dict = psutil.sensors_temperatures()
     for key in try_keys:
         if key in temps_dict:
             temps = temps_dict[key]
             break
-        else:
-            return [Text("No temperature sensors found", style="bold red")]
-    
-    core_temp_list = []
+    else:
+        return [Text("No temperature sensors found", style="bold red")]
+
+    core_temp_list = [gif_art, Text("")]  # start with gif and a blank line for spacing
     for i, entry in enumerate(temps):
         if i == 0:
             # first entry is treated as overall highest
