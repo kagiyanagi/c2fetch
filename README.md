@@ -4,6 +4,8 @@
 
 **Lightweight real‑time CPU temperature monitor 🌡️** with customizable ASCII art, powered by [psutil](https://pypi.org/project/psutil/) and [rich](https://github.com/Textualize/rich).
 
+<Img src="https://raw.githubusercontent.com/quietpulse/c2fetch/refs/heads/main/Pasted_image.png"/> 
+
 </div>
 
 ---
