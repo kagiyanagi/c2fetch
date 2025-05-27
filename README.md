@@ -117,5 +117,5 @@ c2fetch [--color COLOR]
 
 ---
 
-#### Designed and Crafted with ❤️ & ✨ by ~ @quietpulse
+##### Designed and Crafted with ❤️ & ✨ by ~ @quietpulse
 
