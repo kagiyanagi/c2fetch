@@ -41,7 +41,7 @@ chmod +x setup.sh
 1. **Clone repo**
 
    ```bash
-   git clone https://github.com/youruser/c2fetch.git && cd c2fetch
+   git clone https://github.com/kagiyanagi/c2fetch.git && cd c2fetch
    ```
 
 2. **Install dependencies**
