@@ -2,7 +2,7 @@
 
 # **C2fetch**
 
-**Lightweight real‑time CPU temperature monitor 🌡️** with customizable ASCII art, powered by [psutil](https://pypi.org/project/psutil/) and [rich](https://github.com/Textualize/rich).
+**Lightweight real‑time CPU temperature monitor** with customizable ASCII art, powered by [psutil](https://pypi.org/project/psutil/) and [rich](https://github.com/Textualize/rich).
 
 <Img src="https://raw.githubusercontent.com/quietpulse/c2fetch/refs/heads/main/Pasted_image.png"/> 
 
@@ -10,15 +10,16 @@
 
 ---
 
-## 🧩 Requirements
+## Requirements
 
 - **Python** 3.6+
 - **rich** & **psutil** (`pip install rich psutil`)
 - Unix‑like OS (Linux)
+- Some patience.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 | Method          | Command                                  | Notes                             |
 | --------------- | ---------------------------------------- | --------------------------------- |
@@ -28,15 +29,16 @@
 
 ---
 
-### 🔧 Automated (Arch Linux)
+### Automated (Arch Linux)
 
 ```bash
+git clone https://github.com/kagiyanagi/c2fetch.git && cd c2fetch
 chmod +x setup.sh
 ./setup.sh        # Installs c2fetch + dependencies
 ./setup.sh --uninstall
 ````
 
-### 🛠️ Manual (Ubuntu, Fedora, etc.)
+### Manual (Ubuntu, Fedora, etc.)
 
 1. **Clone repo**
 
@@ -67,10 +69,10 @@ chmod +x setup.sh
      pip3 install --user rich psutil
      ```
 
-3. **Alias (optional)**
+3. **Alias**
 
    ```bash
-   echo "alias c2fetch='python3 $(pwd)/main.py'" >> ~/.bashrc && source ~/.bashrc
+   echo "alias c2fetch='python3 $(pwd)/main.py'" >> ~/.bashrc && source ~/.bashrc # or whichwever shell your are using.
    ```
 
 4. **Run**
@@ -81,7 +83,7 @@ chmod +x setup.sh
 
 ---
 
-## 🎨 Usage & Options
+## Usage & Options
 
 ```bash
 c2fetch [--color COLOR]
@@ -91,14 +93,14 @@ c2fetch [--color COLOR]
 
 ---
 
-## 🛠️ Customization
+## Customization
 
 * **Thresholds**: Edit `temp_style()` in `main.py`.
 * **ASCII art**: Replace banner in `create_ascii_art()`.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork & clone this repository.
 2. Create a feature branch:
